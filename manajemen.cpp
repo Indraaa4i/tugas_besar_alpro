@@ -322,6 +322,11 @@ void listPemrograman () {
     if(pilih > 21 && pilih <= 40) {
          buku dipilih = pemrogramanList[pilih - 21];
             Peminjaman struk;
+
+            cout << "Masukkan nama sebelum meminjam buku : ";
+            cin.ignore();
+            getline(cin, struk.namaPeminjam);
+            
             struk.judul = dipilih.judul;
             struk.penulis = dipilih.penulis;
             struk.penerbit = dipilih.penerbit;
@@ -331,6 +336,7 @@ void listPemrograman () {
             struk.tanggalKembali = getTanggal(7);    
 
             cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Nama peminjam  : " << struk.namaPeminjam << endl;
             cout << "Judul Buku     : " << struk.judul << endl;
             cout << "Penulis        : " << struk.penulis << endl;
             cout << "Penerbit       : " << struk.penerbit << endl;
