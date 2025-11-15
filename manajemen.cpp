@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <ctime>
 using namespace std;
 
 struct buku {
@@ -9,6 +10,31 @@ struct buku {
     string penerbit;
     int tahunterbit;
 };
+
+struct Peminjaman {
+    string namaPeminjam;
+    string judul;
+    string penulis;
+    string penerbit;
+    int tahun;
+    string tanggalPinjam;
+    string tanggalKembali;
+};
+
+string getTanggal(int tambahHari = 0) {
+    time_t now = time(nullptr);
+    now += tambahHari * 24 * 60 * 60;
+
+    tm *ltm = localtime(&now);
+
+    char buffer[20];
+    sprintf(buffer, "%02d-%02d-%d", 
+            ltm->tm_mday, 
+            ltm->tm_mon + 1, 
+            1900 + ltm->tm_year);
+
+    return string(buffer);
+}
 
 vector<buku> romanceList = {
     {1, "Cinta di Musim Hujan", "Dewi Anggraini", "Gramedia", 2020},
@@ -129,6 +155,7 @@ void menuPerpustakaan();
 void pinjamBuku();
 void listRomance();
 void listPemrograman();
+void listMisteri();
 void pauseScreen();
 
 void pauseScreen () {
@@ -201,7 +228,7 @@ void pinjamBuku() {
                 listPemrograman();
                 break;
             case 3:
-                cout << "kamu memilih misteri\n";
+                listMisteri();
                 break;
             case 4:
                 cout << "fantasi\n";
@@ -239,7 +266,33 @@ void listRomance() {
     cin >> pilih;
 
     if(pilih > 0 && pilih <= 20) {
-        cout << "\nkamu meminjam buku: " << romanceList[pilih - 1].judul << endl;
+
+       buku dipilih = romanceList[pilih - 1];
+            Peminjaman struk;
+            
+            cout << "Masukkan nama sebelum meminjam buku : ";
+            cin.ignore();
+            getline(cin, struk.namaPeminjam);
+            
+            struk.judul = dipilih.judul;
+            struk.penulis = dipilih.penulis;
+            struk.penerbit = dipilih.penerbit;
+            struk.tahun = dipilih.tahunterbit;
+
+            struk.tanggalPinjam = getTanggal();      
+            struk.tanggalKembali = getTanggal(7);    
+
+            cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Nama peminjam  : " << struk.namaPeminjam << endl;
+            cout << "Judul Buku     : " << struk.judul << endl;
+            cout << "Penulis        : " << struk.penulis << endl;
+            cout << "Penerbit       : " << struk.penerbit << endl;
+            cout << "Tahun Terbit   : " << struk.tahun << endl;
+            cout << "---------------------------------------\n";
+            cout << "Tanggal Pinjam : " << struk.tanggalPinjam << endl;
+            cout << "Tanggal Kembali: " << struk.tanggalKembali << endl;
+            cout << "=======================================\n";
+
     } else {
         cout << "ID tidak valid\n";
     }
@@ -267,7 +320,25 @@ void listPemrograman () {
     cin >> pilih;
 
     if(pilih > 21 && pilih <= 40) {
-        cout << "\nkamu meminjam buku: " << pemrogramanList[pilih - 21].judul << endl;
+         buku dipilih = pemrogramanList[pilih - 21];
+            Peminjaman struk;
+            struk.judul = dipilih.judul;
+            struk.penulis = dipilih.penulis;
+            struk.penerbit = dipilih.penerbit;
+            struk.tahun = dipilih.tahunterbit;
+
+            struk.tanggalPinjam = getTanggal();      
+            struk.tanggalKembali = getTanggal(7);    
+
+            cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Judul Buku     : " << struk.judul << endl;
+            cout << "Penulis        : " << struk.penulis << endl;
+            cout << "Penerbit       : " << struk.penerbit << endl;
+            cout << "Tahun Terbit   : " << struk.tahun << endl;
+            cout << "---------------------------------------\n";
+            cout << "Tanggal Pinjam : " << struk.tanggalPinjam << endl;
+            cout << "Tanggal Kembali: " << struk.tanggalKembali << endl;
+            cout << "=======================================\n";
     } else {
         cout << "ID tidak valid\n";
     }
@@ -275,6 +346,51 @@ void listPemrograman () {
     pauseScreen();
 }
     
+void listMisteri () {
+    system("cls"); 
+    int pilih;
+        cout << "================================================\n";
+        cout << "               MISTERI LIST\n";
+        cout << "================================================\n";
+        
+        for (const auto& buku : misteriList) {
+        cout << buku.id << ". " << buku.judul
+             << " - " << buku.penulis
+             << " - " << buku.penerbit
+             << " - " << buku.tahunterbit << endl;
+    }
+
+        cout << "------------------------------------------------\n";
+
+    cout << "masukan ID buku yang ingin di pinjam: ";
+    cin >> pilih;
+
+    if(pilih > 41 && pilih <= 60) {
+         buku dipilih = misteriList[pilih - 41];
+            Peminjaman struk;
+            struk.judul = dipilih.judul;
+            struk.penulis = dipilih.penulis;
+            struk.penerbit = dipilih.penerbit;
+            struk.tahun = dipilih.tahunterbit;
+
+            struk.tanggalPinjam = getTanggal();      
+            struk.tanggalKembali = getTanggal(7);    
+
+            cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Judul Buku     : " << struk.judul << endl;
+            cout << "Penulis        : " << struk.penulis << endl;
+            cout << "Penerbit       : " << struk.penerbit << endl;
+            cout << "Tahun Terbit   : " << struk.tahun << endl;
+            cout << "---------------------------------------\n";
+            cout << "Tanggal Pinjam : " << struk.tanggalPinjam << endl;
+            cout << "Tanggal Kembali: " << struk.tanggalKembali << endl;
+            cout << "=======================================\n";
+    } else {
+        cout << "ID tidak valid\n";
+    }
+
+    pauseScreen();
+}
 
 int main () {
     menuPerpustakaan();
