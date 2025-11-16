@@ -156,6 +156,8 @@ void pinjamBuku();
 void listRomance();
 void listPemrograman();
 void listMisteri();
+void listFantasi();
+void listSejarah();
 void pauseScreen();
 
 void pauseScreen () {
@@ -231,10 +233,10 @@ void pinjamBuku() {
                 listMisteri();
                 break;
             case 4:
-                cout << "fantasi\n";
+                listFantasi();
                 break;
             case 5:
-                cout << "sejarah\n";
+                listSejarah();
                 break;
             case 6:
                 cout << "kembali ke menu utama\n";
@@ -374,6 +376,11 @@ void listMisteri () {
     if(pilih > 41 && pilih <= 60) {
          buku dipilih = misteriList[pilih - 41];
             Peminjaman struk;
+
+            cout << "Masukkan nama sebelum meminjam buku : ";
+            cin.ignore();
+            getline(cin, struk.namaPeminjam);
+
             struk.judul = dipilih.judul;
             struk.penulis = dipilih.penulis;
             struk.penerbit = dipilih.penerbit;
@@ -383,6 +390,111 @@ void listMisteri () {
             struk.tanggalKembali = getTanggal(7);    
 
             cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Nama peminjam  : " << struk.namaPeminjam << endl;
+            cout << "Judul Buku     : " << struk.judul << endl;
+            cout << "Penulis        : " << struk.penulis << endl;
+            cout << "Penerbit       : " << struk.penerbit << endl;
+            cout << "Tahun Terbit   : " << struk.tahun << endl;
+            cout << "---------------------------------------\n";
+            cout << "Tanggal Pinjam : " << struk.tanggalPinjam << endl;
+            cout << "Tanggal Kembali: " << struk.tanggalKembali << endl;
+            cout << "=======================================\n";
+    } else {
+        cout << "ID tidak valid\n";
+    }
+
+    pauseScreen();
+}
+
+void listFantasi () {
+    system("cls"); 
+    int pilih;
+        cout << "================================================\n";
+        cout << "               FANTASI LIST\n";
+        cout << "================================================\n";
+        
+        for (const auto& buku : fantasiList) {
+        cout << buku.id << ". " << buku.judul
+             << " - " << buku.penulis
+             << " - " << buku.penerbit
+             << " - " << buku.tahunterbit << endl;
+    }
+
+        cout << "------------------------------------------------\n";
+
+    cout << "masukan ID buku yang ingin di pinjam: ";
+    cin >> pilih;
+
+    if(pilih > 61 && pilih <= 80) {
+         buku dipilih = fantasiList[pilih - 61];
+            Peminjaman struk;
+
+            cout << "Masukkan nama sebelum meminjam buku : ";
+            cin.ignore();
+            getline(cin, struk.namaPeminjam);
+
+            struk.judul = dipilih.judul;
+            struk.penulis = dipilih.penulis;
+            struk.penerbit = dipilih.penerbit;
+            struk.tahun = dipilih.tahunterbit;
+
+            struk.tanggalPinjam = getTanggal();      
+            struk.tanggalKembali = getTanggal(7);    
+
+            cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Nama peminjam  : " << struk.namaPeminjam << endl;
+            cout << "Judul Buku     : " << struk.judul << endl;
+            cout << "Penulis        : " << struk.penulis << endl;
+            cout << "Penerbit       : " << struk.penerbit << endl;
+            cout << "Tahun Terbit   : " << struk.tahun << endl;
+            cout << "---------------------------------------\n";
+            cout << "Tanggal Pinjam : " << struk.tanggalPinjam << endl;
+            cout << "Tanggal Kembali: " << struk.tanggalKembali << endl;
+            cout << "=======================================\n";
+    } else {
+        cout << "ID tidak valid\n";
+    }
+
+    pauseScreen();
+}
+
+void listSejarah () {
+     system("cls"); 
+    int pilih;
+        cout << "================================================\n";
+        cout << "               FANTASI LIST\n";
+        cout << "================================================\n";
+        
+        for (const auto& buku : sejarahList) {
+        cout << buku.id << ". " << buku.judul
+             << " - " << buku.penulis
+             << " - " << buku.penerbit
+             << " - " << buku.tahunterbit << endl;
+    }
+
+        cout << "------------------------------------------------\n";
+
+    cout << "masukan ID buku yang ingin di pinjam: ";
+    cin >> pilih;
+
+    if(pilih > 81 && pilih <= 100) {
+         buku dipilih = sejarahList[pilih - 81];
+            Peminjaman struk;
+
+            cout << "Masukkan nama sebelum meminjam buku : ";
+            cin.ignore();
+            getline(cin, struk.namaPeminjam);
+
+            struk.judul = dipilih.judul;
+            struk.penulis = dipilih.penulis;
+            struk.penerbit = dipilih.penerbit;
+            struk.tahun = dipilih.tahunterbit;
+
+            struk.tanggalPinjam = getTanggal();      
+            struk.tanggalKembali = getTanggal(7);    
+
+            cout << "\n========== DETAIL PEMINJAMAN ==========\n";
+            cout << "Nama peminjam  : " << struk.namaPeminjam << endl;
             cout << "Judul Buku     : " << struk.judul << endl;
             cout << "Penulis        : " << struk.penulis << endl;
             cout << "Penerbit       : " << struk.penerbit << endl;
